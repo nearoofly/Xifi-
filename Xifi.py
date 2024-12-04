@@ -54,7 +54,7 @@ def scan_networks():
                 print(Fore.GREEN + f"Réseau trouvé : SSID : {ssid}, BSSID : {bssid}")
 
     # Utiliser un timeout plus long si nécessaire
-    sniff(iface='wlan0mon', prn=packet_handler, timeout=60)  # Sniffer pour 60 secondes
+    sniff(iface='wlan0', prn=packet_handler, timeout=60)  # Sniffer pour 60 secondes
     return networks
 
 def capture_handshake(target_bssid):
@@ -64,7 +64,7 @@ def capture_handshake(target_bssid):
 
     # Démarrer airodump-ng pour capturer le handshake
     print(Fore.YELLOW + f"Démarrage de airodump-ng pour capturer le handshake de {target_bssid}...")
-    airodump_command = f"airodump-ng --bssid {target_bssid} -c 6 --write {capture_dir}/capture wlan0mon"
+    airodump_command = f"airodump-ng --bssid {target_bssid} -c 6 --write {capture_dir}/capture wlan0"
     
     try:
         subprocess.Popen(airodump_command, shell=True)
@@ -110,9 +110,11 @@ def main():
         # par exemple, attendre une entrée de l'utilisateur
         input(Fore.YELLOW + "Appuyez sur Entrée pour arrêter le script...")
     else:
-        print(Fore.RED + "Aucun réseau trouvé :Contact Wharkly47 pour obtenir la version recente du logiciel. Mail: wharklya@gmail.com 
-        
-              Sortie.")
+        print(Fore.RED + (
+    "Aucun réseau trouvé : Contact Wharkly47 pour obtenir la version récente du logiciel. "
+    "Mail: wharklya@gmail.com"
+))
+
 
 if __name__ == '__main__':
     main()
